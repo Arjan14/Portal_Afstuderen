@@ -1,0 +1,24 @@
+@mixin generate_all($theme-colors) {
+  @include generate_swatch($theme-colors);
+  @include generate_ink($theme-colors);
+}
+
+@mixin generate_swatch($theme-colors) {
+
+  @each $color,
+  $value in $theme-colors {
+    .swatch-#{$color} {
+      color: color-contrast($value);
+    }
+  }
+}
+
+@mixin generate_ink($theme-colors) {
+
+  @each $color,
+  $value in $theme-colors {
+    .text-#{$color}-ink {
+      color: rgba($value, 0.38);
+    }
+  }
+}

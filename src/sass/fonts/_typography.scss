@@ -1,0 +1,35 @@
+// Fonts
+@use './fonts';
+
+// See https://getbootstrap.com/docs/5.1/content/typography/ for more info on typography
+$font-family-base: "Inter";
+$font-size-base: 1rem;
+$line-height-base: 1.5;
+
+.font-weight-regular {
+  font-weight: 400;
+}
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.font-weight-semi-bold {
+  font-weight: 600;
+}
+
+.font-weight-bold {
+  font-weight: 700;
+}
+
+h3 {
+  font-weight: 600;
+}
+
+h5 {
+  font-weight: 500;
+}
+
+th {
+  font-weight: 600;
+}

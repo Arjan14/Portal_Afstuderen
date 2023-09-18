@@ -1,0 +1,93 @@
+// Overrides moeten boven de imports, dan worden de override variabelen gebruikt in de variables van Bootstrap.
+// Dus als $border-radius wordt overschreven, worden ook alle variabelen die daar gebruik van maken (zoals $input-border-radius) overschreven op deze manier (zolang geen !default gebruikt wordt).
+// Bron: https://getbootstrap.com/docs/5.0/customize/sass/#importing
+
+$black: #000;
+$gray-900: #212529;
+
+$border-radius: .375rem;
+
+$box-shadow: 0 .125rem .25rem rgba($black, .06);
+
+$btn-box-shadow: 0 .125rem .25rem rgba($black, .06);
+
+$dropdown-border-color: #D1DAE6;
+$dropdown-header-color: $gray-900;
+
+$input-border-color: #D1DAE6;
+$input-btn-padding-y: .5rem;
+
+$form-check-input-border: 1px solid $input-border-color;
+
+@import "theme_mixins";
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+@import "src/sass/utilities/_custom_vars.scss";
+
+$grid-breakpoints: (
+  xs: $screen-width-xs,
+  sm: $screen-width-sm,
+  md: $screen-width-md,
+  lg: $screen-width-lg,
+  xl: $screen-width-xl,
+  xxl: $screen-width-xxl
+);
+$container-max-widths: (
+  sm: $screen-width-sm,
+  md: $screen-width-md,
+  lg: $screen-width-lg,
+  xl: $screen-width-xl,
+  xxl: $screen-width-xxl
+);
+
+$font-size-base: 0.875rem;
+$small-font-size: $font-size-base * 0.85;
+
+$enable-validation-icons: false;
+
+$link-color: #419BF9;
+$body-color: #1D2022;
+
+$progress-bg: #E1E4E8;
+
+$body-bg: #F2F4F7;
+
+$theme-colors: (
+  "primary": #419bf9,
+  "secondary": #77838F,
+  "success": #65C178,
+  "info": #419BF9,
+  "warning": #233e86,
+  // "warning": #F9B441,
+  "danger": #FF4D4F,
+  "light": #ffffff,
+  "dark": #1D2022
+);
+
+// Create your own map
+$custom-colors: (
+  "gray": #E1E4E8,
+  "border-color": #D1DAE6,
+);
+
+$min-contrast-ratio: 2.8;
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+// $utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
+// $utilities-text-colors: map-loop($utilities-colors, rgba-css-var, "$key", "text");
+// $utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
+
+@include generate_all($theme-colors);
+
+// Override some swatch colors
+.swatch-primary {
+  color: #fff !important;
+}
+
+// This import at the bottom to interpret the variables
+@import "~bootstrap/scss/bootstrap";

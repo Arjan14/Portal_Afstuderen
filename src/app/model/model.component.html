@@ -1,0 +1,14 @@
+
+<!-- Check of user is ingelogd anders wordt er geen cesium map weergegeven -->
+<div *ngIf="fireService.auth.currentUser">
+  <!-- <div appCesiumMap [assetId]="1432996"></div>-->
+  <div class="overlay">
+    <img id="logo" src="../assets/logos/model.svg" width="240vh">
+  </div>
+  <router-outlet>  </router-outlet>
+  <app-cesium-map [assetId]="assetId"></app-cesium-map>
+</div>
+
+<!-- Check of user is ingelogd anders wordt er geen cesium map weergegeven -->
+<div *ngIf="fireService.auth.currentUser==undefined"></div>
+

@@ -1,0 +1,61 @@
+<!-- <img id="logo" src="assets/dash.svg" width="250vh"> -->
+<img id="logo" src="assets/logos/dash.svg" width="250vh">
+<!-- Uitlog knop -->
+<button (click)="fireService.signOut()" id="logoutButton" class="btn btn-warning">Uitloggen</button>
+
+<!-- Begroeting en weergave van afbeeldingen -->
+<div class="tabletext">
+  <div class="textContainer">
+    <h1>Welkom, {{username}}</h1>
+    <h2>Klik op een asset om verder te gaan</h2>
+  </div>
+  <div class="imageContainer">
+    <img [src]="imageUrlDrone" alt="">
+    <img [src]="imageUrlInstructies" alt="" (click)="downloadFile()" id="downloadButton">
+  </div>
+</div>
+
+<!-- Lijst met assets weergeven in table voor BAM -->
+<div class="assetstable">
+  <table class="dash">
+    <tr>
+      <th>Naam Asset</th>
+      <th>Asset ID</th>
+      <th>Locatie</th>
+      <th>Geplaatst op</th>
+    </tr>
+    <tr (click)="loadAsset(1604370)">
+      <td>Bemmel_B1 (algoritme-visualisatie)</td>
+      <td>1604370</td>
+      <td>Bemmel</td>
+      <td>30-3-2023</td>
+    </tr>
+    <tr (click)="loadAsset(2273011)">
+      <td>Nijmegen Blok A (algoritme-visualisatie)</td>
+      <td>2273011</td>
+      <td>Nijmegen</td>
+      <td>13-9-2023</td>
+    </tr>
+    <tr (click)="loadAsset(1696313)">
+      <td>Udenhout blok A</td>
+      <td>1696313</td>
+      <td>Udenhout</td>
+      <td>17-5-2023</td>
+    </tr>
+    <tr (click)="loadAsset(2272565)">
+      <td>BAM Nijmegen Blokken</td>
+      <td>2273011</td>
+      <td>Nijmegen</td>
+      <td>11-9-2023</td>
+    </tr>
+    <tr (click)="loadAsset(123)">
+      <td>Google maps 3D tiles</td>
+      <td>N.v.t.</td>
+      <td>N.v.t.</td>
+      <td>N.v.t.</td>
+    </tr>
+  </table>
+</div>
+
+<!-- Google maps -->
+<div id="googleMap"></div>

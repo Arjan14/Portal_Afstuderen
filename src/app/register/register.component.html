@@ -1,0 +1,20 @@
+<img id="logo" src="../assets/logos/model.svg" width="240vh">
+
+<!-- Login formulier -->
+<div *ngIf="fireService.auth.currentUser == null">
+  <div id="loginBox">
+    <img src="../../assets/logos/logosmall.png" style="border-radius: 100%;" width="141px">
+    <h3>Welkom,</h3>
+    <h4>Registreer hier uw account:</h4>
+    <div id="loginInputBox">
+      <p><i class="fa-regular fa-envelope fs-5" style="transform: translateY(2px);"></i>Email</p>
+      <input [(ngModel)]="username" type="email" placeholder="Email">
+    </div>
+    <div id="loginInputBox">
+      <p><i class="fa-solid fa-key fs-5"></i>Wachtwoord</p>
+      <input [(ngModel)]="password" type="password" placeholder="Wachtwoord">
+    </div>
+    <button (click)="fireService.register(username, password)" id="loginButton">Registreer</button>
+    <i id="loginLinks1" routerLink="/login">Terug naar inloggen</i>
+  </div>
+</div>

@@ -1,0 +1,787 @@
+div[cesiumMap] {
+  z-index: -1;
+  position: absolute;
+  width: 50%;
+  float: right;
+}
+
+// Performance slider
+.slider {
+  -webkit-appearance: none;
+  width: 85%;
+  height: 4px;
+  background: #ffffff;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  opacity: 1;
+}
+
+input[type=range].disabled::-webkit-slider-thumb {
+  background: #CCCCCC;
+}
+
+.slider::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.settings {
+  float: right;
+  padding: 13px;
+  position: absolute;
+  left: 135px;
+  top: 40%;
+  background-color: #1d1d1def;
+  border-radius: 5px;
+  -webkit-box-shadow: 4px 10px 18px -4px rgba(0, 0, 0, 0.61);
+  box-shadow: 4px 10px 18px -4px rgba(0, 0, 0, 0.61);
+}
+
+.settings h1 {
+  color: whitesmoke;
+  float: left;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.settings input {
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.settings span {
+  color: #ececec;
+  float: right;
+  top: 0;
+}
+
+.settings input {
+  background: #ffffff;
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+// Performance slider einde
+
+// Afbeeldingen overzicht
+.pictures {
+  background: rgba(56, 61, 73, 0.61);
+  border-left: 5px solid #33353C;
+  height: 100vh;
+  padding: 10px;
+  float: right;
+  color: white;
+  overflow: scroll;
+  height: 100vh;
+}
+
+.imageShower {
+  border-radius: 10px;
+  background-color: white;
+  padding-bottom: 40px;
+  padding: 4px;
+  margin-bottom: 20px;
+}
+
+.imageShower img {
+  border-radius: 10px;
+}
+// Afbeeldingen overzicht einde
+
+
+.icons {
+  background-color: white;
+  padding-bottom: 35px;
+  padding-top: 5px;
+  background: linear-gradient(#b4b4b4, #b4b4b4) no-repeat center/2px 95%;
+}
+
+// Comment overzicht
+.popup-content {
+  position: absolute;
+  background-color: #2d2d2cf8;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  min-width: 399px;
+  max-width: 400px;
+  text-align: center;
+  margin-top: -50px;
+  margin-left: -50px;
+  top: 50%;
+  left: 40%;
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 10px 18px -4px rgba(0, 0, 0, 0.61);
+  box-shadow: 4px 10px 18px -4px rgba(0, 0, 0, 0.61);
+}
+
+
+.popup-content h2 {
+  font-size: 24px;
+  color: #ffffff;
+  padding-bottom: 12px;
+  padding-top: 25px;
+  text-align: left;
+}
+
+.popup-content textarea {
+  border-radius: 10px;
+  background-color: #161616;
+  outline: none;
+  width: 100%;
+  color: #3f3f3f;
+  border: none;
+  padding: 10px;
+  height: 20%;
+  color: #e4e4e4;
+}
+
+.popup-content button {
+  background-color: #233e86;
+  color: white;
+  width: 100%;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  margin: auto;
+  padding: 6px;
+  border-radius: 10px;
+  margin-bottom: 13px;
+  margin-top: 20px;
+}
+
+.popup-content button:hover {
+  background-color: #22366e;
+
+}
+
+.popup-content span {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.commentShower {
+  background-color: #161616;
+  margin-top: 10px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+
+}
+
+.commentShower h1 {
+  font-size: 12pt;
+  font-weight: 700;
+  color: #cacaca;
+}
+
+.commentShower h2 {
+  font-size: 14pt;
+  font-weight: 400;
+  color: #cacaca;
+}
+
+.commentShower h3 {
+  font-size: 8pt;
+  font-weight: 400;
+  color: #cacaca;
+}
+
+.message h4 {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  // margin-top: 4px;
+  margin-bottom: 15px;
+}
+
+.message {
+  background: #2a2a2af5;
+  max-width: 500px;
+  min-width: 450px;
+  border-radius: 10px;
+  padding: 25px;
+  -webkit-box-shadow: 4px 10px 18px -4px rgba(0,0,0,0.61); 
+  box-shadow: 4px 10px 18px -4px rgba(0,0,0,0.61);
+  position: absolute;
+  top: 70px;
+  right: 16px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.message span {
+  position: absolute;
+  top: 45px;
+  right: 45px;
+  cursor: pointer;
+}
+
+.message button {
+  background-color: #233e86;
+  color: white;
+  width: 100%;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  margin: auto;
+  padding: 6px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.message button:hover {
+  background-color: #22366e;
+}
+
+.comments {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 70vh;
+}
+
+.message button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  content: "Selecteer een punt";
+}
+
+.noComments h1 {
+  margin-top: 15px;
+  color: #e2e2e2;
+  font-size: 80pt;
+  font-weight: 700;
+  text-align: center;
+}
+
+.noComments h2 {
+  color: #cacaca;
+  text-align: center;
+  font-size: 13pt;
+  margin-top: 15px;
+  font-weight: 700;
+}
+
+.noComments h3 {
+  color: #cacaca;
+  text-align: center;
+  font-size: 13pt;
+  margin-bottom: 25px;
+}
+// Comment overzicht einde
+
+// MJOP overzicht
+.mjop_Window h4 {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.mjop_Content h1 {
+  color: whitesmoke;
+  font-size: 24px;
+  background-color: #161616;
+  border-radius: 10px;
+  width: 10%;
+  float: right;
+}
+
+.mjop_Window {
+  background: #2a2a2af5;
+  max-width: 500px;
+  min-width: 450px;
+  border-radius: 10px;
+  padding: 25px;
+  -webkit-box-shadow: 4px 10px 18px -4px rgba(0, 0, 0, 0.61);
+  box-shadow: 4px 10px 18px -4px rgba(0, 0, 0, 0.61);
+  position: absolute;
+  top: 70px;
+  right: 16px;
+}
+
+.mjop_Window span {
+  position: absolute;
+  top: 45px;
+  right: 45px;
+  cursor: pointer;
+}
+
+.mjop_Window button {
+  background-color: #233e86;
+  color: white;
+  width: 48%;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  margin: auto;
+  padding: 6px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.mjop_Window button:hover {
+  background-color: #22366e;
+
+}
+
+.mjop {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 70vh;
+}
+
+.mjop_Shower {
+  background-color: #161616;
+  margin-top: 10px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+}
+
+.mjop_Shower h1 {
+  font-size: 12pt;
+  font-weight: 700;
+  color: #cacaca;
+}
+
+.mjop_Shower h2 {
+  font-size: 14pt;
+  font-weight: 400;
+  color: #cacaca;
+}
+
+.mjop_Shower h3 {
+  font-size: 8pt;
+  font-weight: 400;
+  color: #cacaca;
+}
+
+.noMJOP h1 {
+  margin-top: 15px;
+  color: #e2e2e2;
+  font-size: 80pt;
+  font-weight: 700;
+  text-align: center;
+}
+
+.noMJOP h2 {
+  color: #cacaca;
+  text-align: center;
+  font-size: 13pt;
+  margin-top: 15px;
+  font-weight: 700;
+}
+
+.noMJOP h3 {
+  color: #cacaca;
+  text-align: center;
+  font-size: 13pt;
+  margin-bottom: 25px;
+}
+
+.mjop_Content {
+  position: absolute;
+  background-color: #2d2d2cf8;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  min-width: 350px;
+  max-width: 400px;
+  text-align: center;
+  margin-top: -50px;
+  margin-left: -50px;
+  top: 43%;
+  left: 40%;
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 10px 18px -4px rgba(0, 0, 0, 0.61);
+  box-shadow: 4px 10px 18px -4px rgba(0, 0, 0, 0.61);
+}
+
+.mjop_Content h2 {
+  font-size: 24px;
+  color: #ffffff;
+  padding-bottom: 8px;
+  padding-top: 25px;
+  text-align: left;
+}
+
+.mjop_Content p {
+  color: whitesmoke;
+  float: left;
+}
+
+.mjop_Content button {
+  background-color: #233e86;
+  color: white;
+  width: 100%;
+  float: right;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  margin: auto;
+  padding: 6px;
+  border-radius: 10px;
+  margin-bottom: 13px;
+  margin-top: 20px;
+}
+
+.mjop_Content button:hover {
+  background-color: #22366e;
+}
+
+
+.mjop_Content textarea {
+  border-radius: 10px;
+  background-color: #161616;
+  outline: none;
+  width: 100%;
+  color: #dddddd;
+  border: none;
+  padding: 10px;
+  height: 20%;
+}
+
+.mjop_Content input {
+  margin: 4px;
+  text-align: center;
+}
+// MJOP overzicht einde
+
+// Navigatie bar 
+.navBar {
+  position: absolute;
+  top: 35%;
+  left: 0;
+  background-color: #2a2b2a;
+  margin-left: 20px;
+  border-radius: 5px;
+}
+
+.navBarIcon {
+  color: #ffffff;
+  display: block;
+  z-index: 2;
+  opacity: 0.5;
+  cursor: pointer;
+  margin-bottom: 2px;
+  padding: 5px;
+  text-align: center;
+}
+
+.navBarIcon img {
+  width: 35px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.navBarIcon img:hover {
+  width: 35px;
+}
+
+.navBarIcon:hover {
+  color: #ffffff;
+  display: block;
+  z-index: 2;
+  opacity: 0.5;
+  cursor: pointer;
+  margin-bottom: 2px;
+  background-color: #161616;
+}
+// Navigatie bar einde
+
+
+// Afstand / oppervlakte overzichten
+.measureTool {
+  margin-top: 15px;
+  margin-right: 15px;
+  float: right;
+  background-color: #333333;
+  border: solid 5px #202020;
+  border-radius: 25px;
+  padding: 10px;
+  overflow: scroll;
+  max-height: 300px;
+}
+
+.measureTool table,
+td,
+th {
+  border: 2px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+  color: white;
+  opacity: 1;
+  border-radius: 10px;
+}
+
+.afstand h4 {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 25px;
+  margin-left: 25px;
+}
+
+.afstand {
+  background: #2a2a2af5;
+  max-width: 400px;
+  min-width: 375px;
+  border-radius: 10px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  -webkit-box-shadow: 4px 10px 18px -4px rgba(0, 0, 0, 0.61);
+  box-shadow: 4px 10px 18px -4px rgba(0, 0, 0, 0.61);
+  position: absolute;
+  top: 70px;
+  right: 16px;
+
+}
+
+.afstand button:hover {
+  background-color: #22366e;
+}
+
+.afmeting {
+  background-color: #161616;
+  width: 100%;
+  display: flex;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  overflow-y: scroll;
+  max-height: 30vh;
+}
+
+.afmeting h1 {
+  color: rgb(189, 189, 189);
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+.afmeting h2 {
+  color: white;
+  font-size: 14pt;
+  margin-left: 10px;
+
+}
+
+.afmeting h3 {
+  margin-left: 10px;
+}
+
+.afmeting i {
+  margin-top: 3px;
+  margin-left: 5px;
+
+}
+
+.afstand button {
+  background-color: #233e86;
+  color: white;
+  width: 42%;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  margin: auto;
+  padding: 6px;
+  border-radius: 10px;
+
+  margin-top: 20px;
+}
+
+.afstand button:hover {
+  background-color: #22366e;
+
+}
+
+.dashButton {
+  background-color: #233d86;
+  // background-color: #008531;
+  color: white;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  float: right;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-right: 17px;
+}
+
+.dashButton:hover {
+  background-color: #22366e;
+}
+// Afstand / oppervlakte overzichten einde
+
+
+// Algoritmevisualisatie
+.algoritme h4 {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 25px;
+  margin-left: 25px;
+}
+
+.algoritme h2 {
+  font-size: 16px;
+  font-weight: 200;
+  color: rgb(201, 201, 201);
+  float: right;
+}
+
+.algoritme {
+  background: #2a2a2af5;
+  max-width: 500px;
+  min-width: 450px;
+  border-radius: 10px;
+  padding-top: 25px;
+  padding-bottom: 15px;
+  -webkit-box-shadow: 4px 10px 18px -4px rgba(0, 0, 0, 0.61);
+  box-shadow: 4px 10px 18px -4px rgba(0, 0, 0, 0.61);
+  position: absolute;
+  top: 70px;
+  display: block;
+
+  right: 16px;
+}
+
+.algoritme button:hover {
+  background-color: #22366e;
+}
+
+.algoShower {
+  overflow-y: scroll;
+  max-height: 30vh;
+
+}
+
+.algoritmeNummer {
+  background-color: #161616;
+  width: 100%;
+  display: flex;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+
+.algoritmeNummer:hover {
+  background-color: #0e0e0e;
+}
+
+.algoritmeNummer h1 {
+  color: rgb(189, 189, 189);
+  font-size: 14pt;
+  font-weight: 400;
+}
+
+.algoritmeNummer h2 {
+  color: white;
+  font-size: 14pt;
+  margin-left: 10px;
+}
+
+.algoritmeNummer h3 {
+  margin-left: 10px;
+}
+
+.algoritmeNummer i {
+  margin-top: 3px;
+  margin-left: 5px;
+}
+
+.algoritme button {
+  background-color: #233e86;
+  color: white;
+  width: 35%;
+  float: right;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  padding: 6px;
+  border-radius: 10px;
+  margin-bottom: 13px;
+  margin-top: 20px;
+  margin-right: 48px;
+}
+
+.algoritme button:hover {
+  background-color: #22366e;
+}
+
+.algoritmeNummer th {
+  width: 200px;
+  border: none;
+  padding: 0;
+}
+
+.algoritmeNummer tr {
+  width: 200px;
+  border: none;
+  padding: 0;
+}
+
+.algoritmeNummer select {
+  color: #9e9e9e;
+  background-color: #161616;
+  border: none;
+  font-size: 16px;
+}
+// Algoritmevisualisatie einde

@@ -1,0 +1,261 @@
+<div *ngIf="fireService.auth.currentUser">
+  <div #cesiumMap style="position: absolute; height: 100vh; width: 100vw; z-index: -1; "></div>
+
+  <!--Picture shower-->
+  <div [hidden]="enabledMenu != 'PICTURES'" class="pictures">
+    <div class="imageShower" *ngFor="let url of matchingImageUrls">
+      <img [src]="url" alt="" width="300px">
+      <div class="icons">
+        <a (click)="goToPictureLocation(url)"><i class="fa-solid fa-expand fs-2"
+            style="color: rgb(88, 88, 88); float: left; padding-left: 60px; cursor: pointer;"></i></a>
+        <a href="{{ url }}" target="_blank"><i class="fa-solid fa-magnifying-glass fs-2"
+            style="color: rgb(88, 88, 88); float: right; padding-right: 60px; cursor: pointer;"></i></a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Opmerkingen plaatsen -->
+  <div [hidden]="enabledMenu != 'MESSAGE'" class="message" *ngIf="showCommentWindow">
+    <h4>Opmerkingen</h4>
+    <div class="comments">
+      <ng-container *ngIf="commentArray.length > 0; else noComments">
+        <div class="commentShower" *ngFor="let comment of commentArray">
+          <h1 class="commentHeading">{{comment[2]}} {{comment[3]}}</h1>
+          <h2>{{comment[1]}}</h2>
+          <h3>id: {{comment[0]}} <i (click)="deleteComment(comment[0])" class="fa-solid fa-trash fs-6"
+              style="color: white; float: right; cursor:pointer;"></i> <i (click)="viewComment(comment[0])"
+              class="fa-solid fa-eye fs-6" style="color: white; float: right; cursor:pointer; padding-right: 10px;"></i>
+          </h3>
+        </div>
+        <span (click)="this.toggleCase('message')" class="fa-solid fa-xmark fs-5"
+          style="color: #ececec; float: right; position: absolute; top: 15px; right: 15px; cursor: pointer;"></span>
+
+      </ng-container>
+
+      <ng-template #noComments>
+        <div class="noComments">
+          <span (click)="this.toggleCase('message')" class="fa-solid fa-xmark fs-5"
+            style="color: #ececec; float: right; position: absolute; top: 15px; right: 15px; cursor: pointer;"></span>
+          <h2>Geen opmerkingen</h2>
+          <h3>Klik op de knop hieronder en vervolgens op een punt in het model om een opmerking te genereren.</h3>
+        </div>
+      </ng-template>
+    </div>
+    <button (click)="createComment()" [disabled]="pointSelected">Plaats nieuwe opmerking</button>
+  </div>
+
+  <!-- Popup voor comment -->
+  <div *ngIf="commentWindow">
+    <div class="popup-content">
+      <span (click)="this.togglePopup()" class="fa-solid fa-xmark fs-5" style="color: #ececec;"></span>
+      <h2>Opmerking:</h2>
+      <textarea type="text" #input placeholder="Type hier uw opmerking ..." rows="4"></textarea>
+      <button (click)="logToDB(input.value)">Plaats opmerking</button>
+    </div>
+  </div>
+
+  <!-- Performance menu -->
+  <div class="settings" [hidden]="enabledMenu != 'PERFORMANCE'">
+    <h1>Renderkwaliteit:</h1>
+    <span (click)="this.toggleCase('performance')" class="fa-solid fa-xmark fs-5"></span>
+    <input name="state" type="range" [(ngModel)]="errorValue" (change)="changeScreenSpaceError($event)" min="1" max="22"
+      value="1" class="slider" />
+  </div>
+
+  <!--   Menu -->
+  <div [hidden]="enabledMenu != 'MJOP'" class="mjop_Window">
+    <h4>MJOP</h4>
+    <div class="mjop">
+      <ng-container *ngIf="mjopArray.length > 0; else noMJOP">
+        <span (click)="this.toggleCase('mjop')" class="fa-solid fa-xmark fs-5"
+          style="color: #ececec; float: right; position: absolute; top: 15px; right: 15px; cursor: pointer;"></span>
+        <div class="mjop_Shower" *ngFor="let mjop of mjopArray">
+          <h1 class="commentHeading">{{mjop[3]}} {{mjop[4]}}</h1>
+          <h2>{{mjop[1]}}</h2>
+          <h3>Kwaliteitscore: {{mjop[2]}} <i (click)="deleteMJOP(mjop[0])" class="fa-solid fa-trash fs-6"
+              style="color: white; float: right; cursor:pointer;"></i></h3>
+        </div>
+      </ng-container>
+
+      <ng-template #noMJOP>
+        <div class="noMJOP">
+          <span (click)="this.toggleCase('mjop')" class="fa-solid fa-xmark fs-5"
+            style="color: #ececec; float: right; position: absolute; top: 15px; right: 15px; cursor: pointer;"></span>
+          <h2>Geen MJOP gevonden</h2>
+          <h3>Voor dit project is geen MJOP gevonden, klik op de knop hieronder om een MJOP te maken.</h3>
+        </div>
+      </ng-template>
+    </div>
+    <button (click)="this.createMJOP()" style="margin-right: 16px;">Nieuwe MJOP</button>
+    <button (click)="this.createPDF()">Nieuwe PDF</button>
+  </div>
+
+  <!-- Popup voor MJOP -->
+  <div *ngIf="MJOP_Window">
+    <div class="mjop_Content">
+      <h2>MJOP Invoer<span (click)="MJOP_Window = false" class="fa-solid fa-xmark fs-5"
+          style="color: #ececec; float: right;"></span></h2>
+      <p>Omschrijving bouwdeel:</p>
+      <textarea placeholder="Omschrijving..." [(ngModel)]="textareaValue"></textarea>
+      <p style="margin-top: 25px;">Conditiescore bouwdeel:</p>
+      <input class="slider" type="range" [(ngModel)]="numberInputValue" min="1" max="6" value="3">
+      <h1 *ngIf="numberInputValue !== null; else defaultTemplate" style="margin-top: -7px; padding: 3px;">{{
+        numberInputValue }}</h1>
+      <ng-template #defaultTemplate>
+        <h1 style="margin-top: -7px; padding: 3px;">4</h1>
+      </ng-template>
+      <button (click)="mjopToDB()" class="mjop_content_button">Plaats MJOP item</button>
+    </div>
+  </div>
+
+  <!-- Measurements menu -->
+  <div [hidden]="enabledMenu != 'MEASUREMENT'" class="afstand">
+    <h4>Afstanden meten</h4>
+    <ng-container *ngIf="afmetingenArray.length > 0; else noMeting">
+      <span (click)="this.toggleCase('measure')" class="fa-solid fa-xmark fs-5"
+        style="color: #ececec; float: right; position: absolute; top: 15px; right: 15px; cursor: pointer; cursor: pointer;"></span>
+      <div *ngFor="let afmeting of afmetingenArray; let i = index" class="afmeting">
+        <h1>{{i+1}}:</h1>
+        <h2>{{afmeting[4]}}</h2>
+        <div style="position: absolute; right: 20px;">
+          <i (click)="deleteAfmeting(afmeting[0])" class="fa-solid fa-trash fs-6"
+            style="color: white; float: right;"></i>
+          <i (click)="checkMeting(afmeting)" class="fa-solid fa-eye fs-6" style="color: white; float: right;"></i>
+        </div>
+      </div>
+      <div style="display: flex;">
+        <button (click)="deleteAllMeting()"><i class="fa-solid fa-trash fs-6"
+            style="color: white; margin-bottom: 2px;"></i> Verwijder Alles</button>
+        <button (click)="displayMeting()"><i class="fa-solid fa-eye-slash fs-6"
+            style="color: white; margin-bottom: 2px;"></i> Zichtbaar</button>
+      </div>
+      <button (click)="downloadMeting()"><i class="fa-solid fa-file-pdf fs-6"
+          style="color: white; margin-bottom: 2px;"></i> Download</button>
+    </ng-container>
+    <ng-template #noMeting>
+      <div class="noMJOP">
+        <span (click)="this.toggleCase('measure')" class="fa-solid fa-xmark fs-5"
+          style="color: #ececec; float: right; position: absolute; top: 15px; right: 15px; cursor: pointer;"></span>
+        <h2>Geen meting gevonden</h2>
+        <h3>Voor dit project zijn geen metingen gevonden, klik op een punt om een meting te starten!</h3>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- Oppervlaktes menu -->
+  <div [hidden]="enabledMenu != 'OPPERVLAKTES'" class="afstand">
+    <h4>Oppervlakte meten</h4>
+    <ng-container *ngIf="oppervlakteDBValues.length > 0; else noOppervlakte">
+      <span (click)="this.toggleCase('oppervlaktes')" class="fa-solid fa-xmark fs-5"
+        style="color: #ececec; float: right; position: absolute; top: 15px; right: 15px; cursor: pointer;"></span>
+      <div *ngFor="let oppervlakte of oppervlakteDBValues; let i = index" class="afmeting">
+        <h1>{{i+1}}:</h1>
+        <h2>{{oppervlakte[2]}}m2</h2>
+        <div style="position: absolute; right: 20px;">
+          <i (click)="deleteOppervlakte(oppervlakte[0])" class="fa-solid fa-trash fs-6"
+            style="color: white; float: right;"></i>
+          <i (click)="checkOppervlakte(oppervlakte)" class="fa-solid fa-eye fs-6"
+            style="color: white; float: right;"></i>
+        </div>
+      </div>
+      <div style="display: flex;">
+        <button (click)="deleteAllOppervlakte()"><i class="fa-solid fa-trash fs-6"
+            style="color: white; margin-bottom: 2px;"></i> Verwijder Alles</button>
+        <button (click)="displayOppervlakte()"><i class="fa-solid fa-eye-slash fs-6"
+            style="color: white; margin-bottom: 2px;"></i> Zichtbaar</button>
+      </div>
+      <button (click)="downloadOppervlakte()"><i class="fa-solid fa-file-pdf fs-6"
+          style="color: white; margin-bottom: 2px;"></i> Download</button>
+    </ng-container>
+    <ng-template #noOppervlakte>
+      <div class="noMJOP">
+        <span (click)="this.toggleCase('oppervlaktes')" class="fa-solid fa-xmark fs-5"
+          style="color: #ececec; float: right; position: absolute; top: 15px; right: 15px; cursor: pointer;"></span>
+        <h2>Geen oppervlakte gevonden</h2>
+        <h3>Voor dit project zijn geen oppervlakte gevonden,<br>
+          klik op een punt om een meting te starten!</h3>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- Visualisatie algoritme's menu -->
+  <div [hidden]="enabledMenu != 'WINDOWS'" class="algoritme" *ngIf="!showAlgoVisualisatie">
+    <h4>Algoritme visualisatie (LxH)</h4>
+    <div class="algoShower">
+      <div *ngFor="let algo of this.windows" class="algoritmeNummer">
+        <table>
+          <tr>
+            <th style="width: 10px;">
+              <h1 style="margin-right: 15px; color: #9e9e9e; font-weight: 100;">{{algo._id}}: </h1>
+            </th>
+            <th style="width: 200px;">
+              <h1 style="float: left;">{{algo.width}} x {{algo.height}}</h1>
+            </th>
+            <th style="width: 100px;">
+              <h1 style="margin-left: 30px;">{{algo.surfaceM2|number:'1.0-2' }}m²</h1>
+            </th>
+            <th>
+              <select (change)="changeColorAlgo($event, algo.oppervlakteId)">
+                <option value="BLUE">Blauw</option>
+                <option value="RED">Rood</option>
+                <option value="YELLOW">Geel</option>
+                <option value="MAGENTA">Roze</option>
+                <option value="LIME">Groen</option>
+              </select>
+              <i class="fa-solid fa-location-crosshairs fs-6"
+                style="color: white; float: right; margin-bottom: 7px; margin-right: 20px;"
+                (click)="goToEntity(algo.labelId, algo._id)"></i>
+            </th>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <button (click)="toggleAlgo()"><i class="fa-solid fa-eye-slash fs-6" style="color: white; margin-bottom: 2px;"></i>Zichtbaar</button>
+    <button (click)="downloadAlgo()"><i class="fa-solid fa-file-pdf fs-6" style="color: white; margin-bottom: 2px;"></i>Download</button>
+  </div>
+
+  <!-- Terug naar assets buttojn -->
+  <button class="dashButton" routerLink="/Dashboard"> <i class="fa-solid fa-xmark" style="color: #ffffff; "></i> Terug naar assets</button>
+
+
+
+  <!-- Navigatie bar links in het scherm -->
+  <div class="navBar">
+    <a [style]="enabledMenu == 'MEASUREMENT' ? 'background-color: #161616;' : ''" (click)="toggleCase('measure')"
+      class="navBarIcon" title="Meten">
+      <img src="../../assets/icons/afstand_meten.svg" alt="Description of the image">
+    </a>
+    <a title="Oppervlaktes" [style]="enabledMenu == 'OPPERVLAKTES' ? 'background-color: #161616;' : ''"
+      (click)="toggleCase('oppervlaktes')" class="navBarIcon">
+      <img src="../../assets/icons/oppervlakte_meten .svg" alt="Description of the image">
+    </a>
+    <a (click)="flyHomeButton()" title="Reset view" class="navBarIcon">
+      <img src="../../assets/icons/camera_reset.svg" alt="Description of the image">
+    </a>
+    <a [style]="enabledMenu == 'PERFORMANCE' ? 'background-color: #161616;' : ''" (click)="toggleCase('performance')"
+      class="navBarIcon" title="Performance">
+      <img src="../../assets/icons/kwaliteit.svg" alt="Description of the image">
+    </a>
+    <a [style]="enabledMenu == 'MESSAGE' ? 'background-color: #161616;' : ''" (click)="toggleCase('message')"
+      class="navBarIcon" title="Messages">
+      <img src="../../assets/icons/commentaar.svg" alt="Description of the image">
+    </a>
+    <a [style]="enabledMenu == 'WINDOWS' ? 'background-color: #161616;' : ''" (click)="toggleCase('windows')"
+      (click)="toggleAlgo()" class="navBarIcon" *ngIf="!showAlgoVisualisatie" title="Algoritme visualisatie">
+      <img src="../../assets/icons/visualisatie_algoritme.svg" alt="Description of the image">
+    </a>
+    <a [style]="enabledMenu == 'PICTURES' ? 'background-color: #161616;' : ''" (click)="toggleCase('pictures')"
+      class="navBarIcon" title="Afbeeldingen" *ngIf="showAfbeeldingen">
+      <img src="../../assets/icons/afbeeldingen.svg" alt="Description of the image">
+    </a>
+    <a [style]="enabledMenu == 'MJOP' ? 'background-color: #161616;' : ''" class="navBarIcon"
+      (click)="toggleCase('mjop')" (click)="MJOP_Window = false" title="MJOP">
+      <img src="../../assets/icons/mjop.svg" alt="Description of the image" style="width: 40px;">
+    </a>
+    <a class="navBarIcon" title="Diggin" (click)="showSteiger()" title="Steiger"
+      [style]="enabledMenu == 'STEIGER' ? 'background-color: #161616;' : ''" title="STEIGER"
+      (click)="toggleCase('steiger')" *ngIf="showSteigerEnt">
+      <img src="../../assets/icons/steigervisualisatie.svg" alt="Description of the image" style="width: 40px;">
+    </a>
+  </div>

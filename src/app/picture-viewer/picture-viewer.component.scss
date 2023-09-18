@@ -1,0 +1,106 @@
+#logo {
+  margin-top: 6px;
+  margin-left: 8px;
+}
+
+.imageContainer {
+  float: left;
+  // outline: rgb(0, 255, 0) solid 2px;
+  width: 57.5%;
+  padding: 6px;
+  background-color: #bcbcbc7d;
+  margin-top: 2%;
+  margin-left: 1%;
+  border-radius: 20px;
+
+}
+
+::ng-deep .ngxImageZoomContainer>img {
+  max-height: 78.5vh;
+  border-radius: 10px;
+}
+
+::ng-deep .ngxImageZoomContainer {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.imagesViewer {
+  max-height: 79.5vh;
+  width: 39.2%;
+  float: right;
+  overflow: scroll;
+  padding: 5px;
+  background-color: #0000004f;
+  margin-top: 2%;
+  border-radius: 20px;
+  margin-right: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-left: 1.7%;
+}
+
+.imageShower img {
+  width: 179.5px;
+  margin: 10px;
+  border-radius: 4px;
+}
+
+#backButton {
+  float: right;
+  margin: 34px
+}
+
+.imagesViewer:hover .overlay {
+  opacity: 1;
+}
+
+.wrapper {
+  display: flex;
+  height: 100vh;
+  width: 600px;
+  height: 400px;
+  margin: 10px auto;
+}
+
+.left,
+.right {
+  flex: 1 1 auto;
+  border: 1px solid dimgray;
+  max-width: 50%;
+}
+
+.left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left>img {
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.right {
+  position: relative;
+  overflow: hidden;
+}
+
+.inner {
+  position: absolute;
+  width: 400%;
+  height: 400%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner>img {
+  width: 100%;
+  height: auto;
+}

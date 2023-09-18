@@ -1,0 +1,13 @@
+<!-- Logo's -->
+<img id="logo" src="assets/logos/model.svg" width="250vh">
+
+<!-- Button om terug te navigeren -->
+<button class="btn btn-warning" (click)="loadAsset(1696313)" id="backButton">Terug naar model   </button>
+
+<!-- Laat images zien -->
+<div class="pictureDiv">
+    <div class="imageContainer">
+        <lib-ngx-image-zoom [thumbImage]=myThumbnail [fullImage]=myFullresImage zoomMode="toggle-freeze" [enableLens]="true" [lensHeight]="200" [lensWidth]="200"  [magnification]="1"></lib-ngx-image-zoom>
+    </div>
+</div>
+

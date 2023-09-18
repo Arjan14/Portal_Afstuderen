@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "sass/theme.scss";
+
+/* Fontawesome */
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+
+html, body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  background-image: url(assets/logos/pattern.svg);
+  background-color: #1e3578;
+  margin: 0px;
+  height: 100%;
+  background-size: 2700px;
+}
+
+.cesium-credit-logoContainer img {
+  display: none;
+}
+.cesium-viewer-bottom a {
+  display: none;
+}
+
+a.cesium-credit-expand-link  {
+  display:none !important;
+}
+
