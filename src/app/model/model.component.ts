@@ -23,7 +23,7 @@ export class ModelComponent implements OnInit {
     // Config voor test/deploy
 
     //Lokaal
-    this.tempAsset = +(this.document.location.href).slice(37);
+    this.tempAsset = +(this.document.location.href).slice(36);
 
     //Firebase 
     // this.tempAsset = +(this.document.location.href).slice(39);
