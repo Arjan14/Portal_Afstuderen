@@ -90,7 +90,7 @@ export class LoadingService {
   //Laad de 3D van Google maps dmv API
   public async load3Dworld(viewer:Cesium.Viewer): Promise<void> {
     //API key, zet even in de environment (gitignore)
-    Cesium.GoogleMaps.defaultApiKey = 'AIzaSyBYhHNnXilf5BWmkq7_DmX004Hc94jYjn0'
+    Cesium.GoogleMaps.defaultApiKey = ''
     //Voeg 3D wereld toe
     try {
       const tileset = await Cesium.createGooglePhotorealistic3DTileset();
